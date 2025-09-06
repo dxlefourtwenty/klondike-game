@@ -7,7 +7,7 @@ import 'components/StockPile.dart';
 import 'components/WastePile.dart';
 import 'components/FoundationPile.dart';
 import 'components/TableauPile.dart';
-import 'card.dart';
+import 'components/card.dart';
 
 class KlondikeGame extends FlameGame {
   // dimensions of a card and gap between
