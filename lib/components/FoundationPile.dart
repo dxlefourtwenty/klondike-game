@@ -6,12 +6,18 @@ import '../suit.dart';
 import 'Pile.dart';
 
 class FoundationPile extends PositionComponent implements Pile {
-  FoundationPile(int intSuit, {super.position})
+  FoundationPile(int intSuit, this.checkWin, {super.position})
       : suit = Suit.fromInt(intSuit),
         super(size: KlondikeGame.cardSize);
 
+  final VoidCallback checkWin;
+
   final Suit suit;
   final List<Card> _cards = [];
+
+  //#region Pile API
+
+  bool get isFull => _cards.length == 13;
 
   void acquireCard(Card card) {
     assert(card.isFaceUp);
@@ -19,6 +25,9 @@ class FoundationPile extends PositionComponent implements Pile {
     card.priority = _cards.length;
     _cards.add(card);
     card.pile = this;
+    if (isFull) {
+      checkWin(); // Get KlondikeWorld to check all FoundationPiles
+    }
   }
 
   @override
@@ -43,7 +52,8 @@ class FoundationPile extends PositionComponent implements Pile {
     ..blendMode = BlendMode.luminosity;
 
   @override
-  bool canMoveCard(Card card) => _cards.isNotEmpty && card == _cards.last;
+  bool canMoveCard(Card card, MoveMethod method) =>
+      _cards.isNotEmpty && card == _cards.last && method != MoveMethod.tap;
 
   @override
   bool canAcceptCard(Card card) {
@@ -53,8 +63,8 @@ class FoundationPile extends PositionComponent implements Pile {
   }
 
   @override
-  void removeCard(Card card) {
-    assert(canMoveCard(card));
+  void removeCard(Card card, MoveMethod method) {
+    assert(canMoveCard(card, method));
     _cards.removeLast();
   }
 
