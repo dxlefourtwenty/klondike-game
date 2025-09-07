@@ -1,13 +1,7 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/components.dart';
-import 'components/StockPile.dart';
-import 'components/WastePile.dart';
-import 'components/FoundationPile.dart';
-import 'components/TableauPile.dart';
-import 'components/card.dart';
 import 'klondike_world.dart';
 
 enum Action { newDeal, sameDeal, changeDraw, haveFun }
