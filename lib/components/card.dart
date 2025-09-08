@@ -24,7 +24,6 @@ class Card extends PositionComponent
 
   final Rank rank;
   final Suit suit;
-  bool _faceUp = false;
   Pile? pile;
 
   // A Base Card is rendered in outline only and is NOT playable. It can be
@@ -34,6 +33,7 @@ class Card extends PositionComponent
   // the same event-handling code, but with different handleTapUp() methods.
   final bool isBaseCard;
 
+  bool _faceUp = false;
   bool _isDragging = false;
   Vector2 _whereCardStarted = Vector2(0, 0);
   final List<Card> attachedCards = [];
@@ -286,7 +286,7 @@ class Card extends PositionComponent
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
-    if (!isDragged) {
+    if (!_isDragging) {
       return;
     }
     final delta = event.localDelta;

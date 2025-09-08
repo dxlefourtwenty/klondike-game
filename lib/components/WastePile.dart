@@ -42,7 +42,6 @@ class WastePile extends PositionComponent
     card.position = position;
     card.priority = _cards.length;
     _cards.add(card);
-
     _fanOutTopCards();
     card.pile = this;
   }
@@ -50,9 +49,10 @@ class WastePile extends PositionComponent
   // called to fan out cards
   void _fanOutTopCards() {
     if (game.klondikeDraw == 1)
+      // No fan-out in Klondike Draw 1.
       return;
-    final n = _cards.length;
 
+    final n = _cards.length;
     for (var i = 0; i < n; i++) {
       _cards[i].position = position;
     }

@@ -26,7 +26,6 @@ class StockPile extends PositionComponent
   }
 
   // top 3 cards to be turned face up and moved to waste pile
-  @override
   void handleTapUp(Card card) {
     final wastePile = parent!.firstChild<WastePile>()!;
     if (_cards.isEmpty) {
